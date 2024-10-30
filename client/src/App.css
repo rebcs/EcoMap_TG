@@ -1,0 +1,264 @@
+/* Reset básico */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Variáveis de cores */
+:root {
+    --primary-color: #4CAF50; /* Verde principal */
+    --secondary-color: #ffffff; /* Branco */
+    --background-color: #f0f4f3; /* Cinza claro de fundo */
+    --text-color: #333333; /* Preto para textos */
+    --accent-color: #f57c00; /* Laranja para destaques */
+    --footer-color: #2e7d32; /* Verde mais escuro para o rodapé */
+}
+
+/* Estilos globais */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--primary-color);
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Header */
+header {
+    background-color: var(--primary-color);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--secondary-color);
+}
+
+header h1 {
+    font-size: 1.5rem;
+}
+
+header nav a {
+    margin: 0 1rem;
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+/* Main content */
+main {
+    text-align: center;
+    padding: 2rem;
+}
+
+main h2 {
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.btnPainel {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 0.5rem;
+}
+
+.btnPainel:hover {
+    background-color: #388e3c;
+}
+
+/* Cards */
+.container-cards {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    width: 250px;
+    text-align: center;
+}
+
+.card img {
+    width: 50px;
+    margin-bottom: 1rem;
+}
+
+.tituloCard {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+/* Modal */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: var(--secondary-color);
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    text-align: left;
+}
+
+.popup-content h2 {
+    margin-bottom: 1rem;
+}
+
+.popup-content label {
+    display: block;
+    margin: 0.5rem 0 0.3rem;
+    color: var(--text-color);
+}
+
+.popup-content input,
+.popup-content select {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 1rem;
+}
+
+.popup-content .close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+/* Botão Buscar no Modal */
+.popup-content button {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 0.8rem;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.popup-content button:hover {
+    background-color: #388e3c;
+}
+
+/* Resultados */
+.resultados-container {
+    padding: 2rem;
+    background-color: var(--background-color);
+}
+
+.resultados-container h2 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.resultados-container .card {
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.resultados-container .card p {
+    margin-bottom: 0.5rem;
+}
+
+.resultados-container .card a {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.resultados-container .card a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background-color: var(--footer-color);
+    padding: 1rem;
+    color: var(--secondary-color);
+    text-align: center;
+    font-size: 0.9rem;
+    margin-top: 2rem;
+}
+
+footer a {
+    color: var(--secondary-color);
+}
+
+footer a:hover {
+    color: var(--accent-color);
+}
+
+footer .footer-links {
+    margin-top: 1rem;
+}
+
+footer .footer-links ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+footer .redes_sociais img {
+    width: 24px;
+    margin: 0 0.5rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header nav a {
+        margin: 0 0.5rem;
+    }
+
+    footer .footer-links ul {
+        flex-direction: column;
+    }
+}
