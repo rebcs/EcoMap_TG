@@ -1,13 +1,13 @@
-// BuscarEmpresaPopup.js
+// BuscarEmpresaPopUp.js
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const BuscarEmpresaPopup = ({ onClose }) => {
+const BuscarEmpresaPopUp = ({ onClose }) => {
     const [address, setAddress] = useState("");
     const [radius, setRadius] = useState(5);
     const [materials, setMaterials] = useState([]);
-    const [transactionType, setTransactionType] = useState("vende");
+    const [transactionType, setTransactionType] = useState("Compra");
     const googleMapsApiKey = "";
     const navigate = useNavigate();
 
@@ -90,21 +90,31 @@ const BuscarEmpresaPopup = ({ onClose }) => {
                         <input
                             type="radio"
                             name="transactionType"
-                            value="vende"
-                            checked={transactionType === "vende"}
-                            onChange={() => setTransactionType("vende")}
+                            value="Compra"
+                            checked={transactionType === "Compra"}
+                            onChange={() => setTransactionType("Compra")}
                         />
-                        Vende Material
+                        Compra
                     </label>
                     <label>
                         <input
                             type="radio"
                             name="transactionType"
-                            value="compra"
-                            checked={transactionType === "compra"}
-                            onChange={() => setTransactionType("compra")}
+                            value="Vende"
+                            checked={transactionType === "Vende"}
+                            onChange={() => setTransactionType("Vende")}
                         />
-                        Compra Material
+                        Vende
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="transactionType"
+                            value="Compra e Vende"
+                            checked={transactionType === "Compra e Vende"}
+                            onChange={() => setTransactionType("Compra e Vende")}
+                        />
+                        Compra e Vende
                     </label>
                 </div>
                 <button onClick={handleSearch}>BUSCAR</button>
@@ -113,4 +123,4 @@ const BuscarEmpresaPopup = ({ onClose }) => {
     );
 };
 
-export default BuscarEmpresaPopup;
+export default BuscarEmpresaPopUp;

@@ -14,6 +14,15 @@ const db = mysql.createConnection({
   database: "ecomap",
 });
 
+const bd = mysql.createPool({
+  host: "localhost",
+  user: "root",
+  password: "123456",
+  database: "ecomap",
+});
+
+export default bd;
+
 app.use(express.json());
 app.use(cors());
 
@@ -54,7 +63,7 @@ app.post("/buscar-ongs", async (req, res) => {
       FROM Usuario AS ong
       JOIN Usuario_tipoMaterial AS utm ON ong.id_usuario = utm.fk_id_usuario
       WHERE utm.fk_id_tipoMaterial IN (${materiais.join(",")}) 
-        AND ong.tipo_servico = 'Retira no Local'
+        AND ong.fk_id_categoria = 2
       HAVING distance < ?
       ORDER BY distance
     `;
@@ -73,13 +82,14 @@ app.post("/buscar-empresas", async (req, res) => {
   try {
     const connection = await db;
     const query = `
-      SELECT emp.*, 
+      SELECT DISTINCT emp.*, 
       (6371 * acos(cos(radians(?)) * cos(radians(emp.latitude)) * cos(radians(emp.longitude) - radians(?)) 
       + sin(radians(?)) * sin(radians(emp.latitude)))) AS distance 
       FROM Usuario AS emp
       JOIN Usuario_tipoMaterial AS utm ON emp.id_usuario = utm.fk_id_usuario
       WHERE utm.fk_id_tipoMaterial IN (${materiais.join(",")}) 
-        AND emp.tipo_servico = ?
+        AND emp.tipo_transacao = ?  -- Filtra pelo tipo de transação (Compra, Vende ou Ambos)
+        AND emp.fk_id_categoria = 1  -- Supondo que a categoria 1 representa empresas de reciclagem
       HAVING distance < ?
       ORDER BY distance
     `;
@@ -89,6 +99,143 @@ app.post("/buscar-empresas", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Erro ao buscar empresas próximas" });
+  }
+});
+
+// // Endpoint para sugestão de novo ponto de coleta
+// app.post("/sugerir-ponto", async (req, res) => {
+//   const { endereco, cep, cidade, estado, materiais } = req.body;
+
+//   try {
+//     const connection = await db;
+
+//     // Insere o ponto de coleta com status_ponto = FALSE
+//     const [result] = await connection.execute(
+//       `INSERT INTO Ponto_coleta (endereco, cep, cidade, estado, status_ponto) VALUES (?, ?, ?, ?, FALSE)`,
+//       [endereco, cep, cidade, estado]
+//     );
+    
+//     const pontoColetaId = result.insertId;
+
+//     // Associa os tipos de materiais aceitos ao ponto de coleta sugerido
+//     const materialQueries = materiais.map((materialId) => {
+//       return connection.execute(
+//         `INSERT INTO PontoColeta_TipoMaterial (fk_id_pontoColeta, fk_id_tipoMaterial) VALUES (?, ?)`,
+//         [pontoColetaId, materialId]
+//       );
+//     });
+
+//     await Promise.all(materialQueries);
+
+//     res.json({ message: "Ponto de coleta sugerido com sucesso!" });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: "Erro ao sugerir ponto de coleta" });
+//   }
+// });
+
+// Função para validar o endereço usando a API de Geocoding do Google Maps
+async function validarEndereco(endereco) {
+  const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+      endereco
+  )}&key=${GOOGLE_MAPS_API_KEY}`;
+
+  const response = await axios.get(geocodeUrl);
+  const data = response.data;
+
+  if (data.status === "OK" && data.results.length > 0) {
+      const location = data.results[0].geometry.location;
+      return {
+          valido: true,
+          latitude: location.lat,
+          longitude: location.lng,
+          enderecoFormatado: data.results[0].formatted_address,
+      };
+  } else {
+      return { valido: false };
+  }
+}
+
+// Endpoint para sugestão de novo ponto de coleta com validação de endereço
+app.post("/sugerir-ponto", async (req, res) => {
+  const { endereco, cep, cidade, estado, materiais } = req.body;
+  const enderecoCompleto = `${endereco}, ${cidade}, ${estado}, ${cep}`;
+
+  try {
+      // Valida o endereço
+      const validacao = await validarEndereco(enderecoCompleto);
+
+      if (!validacao.valido) {
+          return res.status(400).json({ error: "Endereço inválido. Verifique as informações e tente novamente." });
+      }
+
+      const { latitude, longitude, enderecoFormatado } = validacao;
+      const connection = await db;
+
+      // Insere o ponto de coleta com status_ponto = FALSE
+      const [result] = await connection.execute(
+          `INSERT INTO Ponto_coleta (endereco, cep, cidade, estado, latitude, longitude, status_ponto) VALUES (?, ?, ?, ?, ?, ?, FALSE)`,
+          [enderecoFormatado, cep, cidade, estado, latitude, longitude]
+      );
+
+      const pontoColetaId = result.insertId;
+
+      // Associa os tipos de materiais aceitos ao ponto de coleta sugerido
+      const materialQueries = materiais.map((materialId) => {
+          return connection.execute(
+              `INSERT INTO PontoColeta_TipoMaterial (fk_id_pontoColeta, fk_id_tipoMaterial) VALUES (?, ?)`,
+              [pontoColetaId, materialId]
+          );
+      });
+
+      await Promise.all(materialQueries);
+
+      res.json({ message: "Ponto de coleta sugerido com sucesso! Aguarde a validação do administrador." });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Erro ao sugerir ponto de coleta" });
+  }
+});
+
+// app.js
+app.get("/pontos-sugeridos", async (req, res) => {
+  try {
+      const [rows] = await bd.execute(`
+          SELECT p.id_pontoColeta, p.endereco, p.cep, p.cidade, p.estado, p.latitude, p.longitude,
+              GROUP_CONCAT(t.nome_tipoMaterial) AS materiais
+          FROM Ponto_coleta p
+          JOIN PontoColeta_TipoMaterial ptm ON p.id_pontoColeta = ptm.fk_id_pontoColeta
+          JOIN Tipo_material t ON ptm.fk_id_tipoMaterial = t.id_tipoMaterial
+          WHERE p.status_ponto = FALSE
+          GROUP BY p.id_pontoColeta
+      `);
+      res.json(rows);
+  } catch (error) {
+      console.error("Erro ao buscar pontos sugeridos:", error);  // Log detalhado do erro
+      res.status(500).json({ error: "Erro ao buscar pontos sugeridos" });
+  }
+});
+
+app.put("/aprovar-ponto/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+      await bd.execute("UPDATE Ponto_coleta SET status_ponto = TRUE WHERE id_pontoColeta = ?", [id]);
+      res.json({ message: "Ponto aprovado com sucesso!" });
+  } catch (error) {
+      console.error("Erro ao aprovar ponto:", error);
+      res.status(500).json({ error: "Erro ao aprovar ponto" });
+  }
+});
+
+app.delete("/excluir-ponto/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+      await bd.execute("DELETE FROM PontoColeta_TipoMaterial WHERE fk_id_pontoColeta = ?", [id]);
+      await bd.execute("DELETE FROM Ponto_coleta WHERE id_pontoColeta = ?", [id]);
+      res.json({ message: "Ponto excluído com sucesso!" });
+  } catch (error) {
+      console.error("Erro ao excluir ponto:", error);
+      res.status(500).json({ error: "Erro ao excluir ponto" });
   }
 });
 
