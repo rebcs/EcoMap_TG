@@ -4,6 +4,10 @@ import BuscarPontoPopUp from "./BuscarPontoPopUp";
 import BuscarOngPopUp from "./BuscarOngPopUp";
 import BuscarEmpresaPopUp from "./BuscarEmpresaPopUp";
 import SugerirPontoPopUp from "./SugerirPontoPopUp";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import Cards from "../components/Cards";
+
 
 const Home = () => {
     const [activePopup, setActivePopup] = useState(null);
@@ -18,15 +22,7 @@ const Home = () => {
 
     return (
         <div>
-            <header>
-                <h1>EcoMap</h1>
-                <nav>
-                    <a href="/">Home</a>
-                    <a href="/guia">Guia de Reciclagem</a>
-                    <a href="/faq">Perguntas Frequentes</a>
-                    <a href="/sobre">Sobre nós</a>
-                </nav>
-            </header>
+            <Navbar/>
 
             <main>
                 <h2>Encontre o ponto de descarte mais próximo</h2>
@@ -45,7 +41,12 @@ const Home = () => {
             {activePopup === "doacao" && <BuscarOngPopUp onClose={closePopup} />}
             {activePopup === "compravenda" && <BuscarEmpresaPopUp onClose={closePopup} />}
             {activePopup === "sugestao" && <SugerirPontoPopUp onClose={closePopup} />}
+            
+            <Cards/>
+
+            <Footer/>
         </div>
+
     );
 };
 
