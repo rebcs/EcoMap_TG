@@ -239,6 +239,151 @@ app.delete("/excluir-ponto/:id", async (req, res) => {
   }
 });
 
+//novas atualizações
+
+app.post("/adicionar-ponto", async (req, res) => {
+  const { endereco, cep, cidade, estado, latitude, longitude, materiais } = req.body;
+
+  try {
+      // Insere o novo ponto de coleta no banco com status TRUE
+      const [result] = await bd.execute(
+          `INSERT INTO Ponto_coleta (endereco, cep, cidade, estado, latitude, longitude, status_ponto) VALUES (?, ?, ?, ?, ?, ?, TRUE)`,
+          [endereco, cep, cidade, estado, latitude, longitude]
+      );
+
+      const pontoColetaId = result.insertId;
+
+      // Insere os tipos de materiais aceitos pelo ponto de coleta
+      const materialQueries = materiais.map((materialNome) => {
+          return bd.execute(
+              `INSERT INTO PontoColeta_TipoMaterial (fk_id_pontoColeta, fk_id_tipoMaterial) 
+               SELECT ?, id_tipoMaterial FROM Tipo_material WHERE nome_tipoMaterial = ?`,
+              [pontoColetaId, materialNome]
+          );
+      });
+
+      await Promise.all(materialQueries);
+
+      res.json({ message: "Ponto de coleta adicionado com sucesso!" });
+  } catch (error) {
+      console.error("Erro ao adicionar ponto de coleta:", error);
+      res.status(500).json({ error: "Erro ao adicionar ponto de coleta" });
+  }
+});
+
+
+// app.post("/adicionar-ponto", async (req, res) => {
+//   const { endereco, cep, cidade, estado, latitude, longitude, materiais } = req.body;
+
+//   try {
+//       //const connection = await db.getConnection();
+
+//       // Insere o novo ponto de coleta no banco com status TRUE
+//       const [result] = await bd.execute(
+//           `INSERT INTO Ponto_coleta (endereco, cep, cidade, estado, latitude, longitude, status_ponto) VALUES (?, ?, ?, ?, ?, ?, TRUE)`,
+//           [endereco, cep, cidade, estado, latitude, longitude]
+//       );
+
+//       const pontoColetaId = result.insertId;
+
+//       // Insere os tipos de materiais aceitos pelo ponto de coleta
+//       const materialQueries = materiais.map((materialNome) => {
+//           return bd.execute(
+//               `INSERT INTO PontoColeta_TipoMaterial (fk_id_pontoColeta, fk_id_tipoMaterial) 
+//                SELECT ?, id_tipoMaterial FROM Tipo_material WHERE nome_tipoMaterial = ?`,
+//               [pontoColetaId, materialNome]
+//           );
+//       });
+
+//       await Promise.all(materialQueries);
+
+//       res.json({ message: "Ponto de coleta adicionado com sucesso!" });
+//   } catch (error) {
+//       console.error("Erro ao adicionar ponto de coleta:", error);
+//       res.status(500).json({ error: "Erro ao adicionar ponto de coleta" });
+//   }
+// });
+
+// Endpoint para buscar empresas pendentes de validação
+app.get("/empresas-pendentes", async (req, res) => {
+  try {
+      const [rows] = await bd.execute(`
+          SELECT id_usuario, email, nome_org, CNPJ, telefone, descricao, tipo_servico, tipo_transacao, endereco, cep, cidade, estado 
+          FROM Usuario
+          WHERE status_usuario = FALSE AND fk_id_categoria = 1
+      `);
+      res.json(rows);
+  } catch (error) {
+      console.error("Erro ao buscar empresas pendentes:", error);
+      res.status(500).json({ error: "Erro ao buscar empresas pendentes" });
+  }
+});
+
+// Endpoint para validar uma empresa (atualizar status e adicionar coordenadas)
+app.put("/validar-empresa/:id", async (req, res) => {
+  const { id } = req.params;
+  const { endereco, cep, cidade, estado, latitude, longitude } = req.body;
+
+  try {
+      await bd.execute(
+          `UPDATE Usuario SET 
+              endereco = ?, 
+              cep = ?, 
+              cidade = ?, 
+              estado = ?, 
+              latitude = ?, 
+              longitude = ?, 
+              status_usuario = TRUE 
+           WHERE id_usuario = ?`,
+          [endereco, cep, cidade, estado, latitude, longitude, id]
+      );
+      res.json({ message: "Empresa validada e endereço atualizado com sucesso!" });
+  } catch (error) {
+      console.error("Erro ao validar empresa:", error);
+      res.status(500).json({ error: "Erro ao validar empresa" });
+  }
+});
+
+// Endpoint para buscar ONGs pendentes de validação
+app.get("/ongs-pendentes", async (req, res) => {
+  try {
+      const [rows] = await bd.execute(`
+          SELECT id_usuario, email, nome_org, CNPJ, telefone, descricao, tipo_servico, tipo_transacao, endereco, cep, cidade, estado 
+          FROM Usuario
+          WHERE status_usuario = FALSE AND fk_id_categoria = 2
+      `);
+      res.json(rows);
+  } catch (error) {
+      console.error("Erro ao buscar ONGs pendentes:", error);
+      res.status(500).json({ error: "Erro ao buscar ONGs pendentes" });
+  }
+});
+
+// Endpoint para validar uma ONG (atualizar status e adicionar coordenadas)
+app.put("/validar-ong/:id", async (req, res) => {
+  const { id } = req.params;
+  const { endereco, cep, cidade, estado, latitude, longitude } = req.body;
+
+  try {
+      await bd.execute(
+          `UPDATE Usuario SET 
+              endereco = ?, 
+              cep = ?, 
+              cidade = ?, 
+              estado = ?, 
+              latitude = ?, 
+              longitude = ?, 
+              status_usuario = TRUE 
+           WHERE id_usuario = ?`,
+          [endereco, cep, cidade, estado, latitude, longitude, id]
+      );
+      res.json({ message: "ONG validada com sucesso e endereço atualizado!" });
+  } catch (error) {
+      console.error("Erro ao validar ONG:", error);
+      res.status(500).json({ error: "Erro ao validar ONG" });
+  }
+});
+
 app.listen(8000, () => {
   console.log("Connected to backend!");
 });
