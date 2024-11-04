@@ -9,12 +9,12 @@
 
 /* Variáveis de cores */
 :root {
-    --primary-color: #4CAF50; /* Verde principal */
+    --primary-color: #435533; /* Verde principal */
     --secondary-color: #ffffff; /* Branco */
     --background-color: #f0f4f3; /* Cinza claro de fundo */
     --text-color: #333333; /* Preto para textos */
     --accent-color: #f57c00; /* Laranja para destaques */
-    --footer-color: #2e7d32; /* Verde mais escuro para o rodapé */
+    --olive: #55703f; /* Verde mais escuro para o rodapé */
 }
 
 /* Estilos globais */
@@ -299,7 +299,7 @@ button {
     padding: 10px 20px;
     font-size: 16px;
     color: #fff;
-    background-color: #28a745;
+    background-color: #52350f;
     border: none;
     border-radius: 4px;
     cursor: pointer;

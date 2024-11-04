@@ -1,5 +1,6 @@
 // Home.js
 import React, { useState } from "react";
+import '../App.css';
 import BuscarPontoPopUp from "./BuscarPontoPopUp";
 import BuscarOngPopUp from "./BuscarOngPopUp";
 import BuscarEmpresaPopUp from "./BuscarEmpresaPopUp";
