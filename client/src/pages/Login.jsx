@@ -1,7 +1,6 @@
 import React from 'react'
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import "../Geral.css"
 import { Link } from 'react-router-dom';
 
 const Login = () => {

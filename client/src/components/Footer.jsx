@@ -1,9 +1,10 @@
 import React from 'react'
-import Facebook from '../assets/icon_facebook.png'
-import Linkedin from '../assets/icon_linkedin.png'
-import Twitter from '../assets/icon_twitter.png'
-import Youtube from '../assets/icon_youtube.png'
-import Instagram from '../assets/icon_instagram.png'
+import Facebook from '../assets/images/icon_facebook.png'
+import Linkedin from '../assets/images/icon_linkedin.png'
+import Twitter from '../assets/images/icon_twitter.png'
+import Youtube from '../assets/images/icon_youtube.png'
+import Instagram from '../assets/images/icon_instagram.png'
+import '../assets/styles/Footer.css'
 
 const Footer = () => {
   return (
@@ -21,9 +22,7 @@ const Footer = () => {
           <li>
             <a href="">Entre em contato</a>
           </li>
-          <li>
-            <a href="adm.html">*Administrador*</a>
-          </li>
+          
         </ul>
         <div className="redes_sociais">
           <img src={Facebook} alt="" />

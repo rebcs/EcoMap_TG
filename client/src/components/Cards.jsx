@@ -1,8 +1,8 @@
 import React from 'react'
-import Icon1 from '../assets/icon_box1.png'
-import Icon2 from '../assets/icon_box2.png'
-import Icon3 from '../assets/icon_box3.png'
-
+import Icon1 from '../assets/images/icon_box1.png'
+import Icon2 from '../assets/images/icon_box2.png'
+import Icon3 from '../assets/images/icon_box3.png'
+import "../assets/styles/Cards.css"
 
 const Cards = () => {
   return (

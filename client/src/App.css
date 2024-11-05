@@ -7,7 +7,7 @@
 
 /* Corpo */
 body {
-  background-image: url('./assets/index.png');
+  background-image: url('./assets/images/index.png');
   background-size: cover;
   background-position: top center; /* Garante que a imagem de fundo fique alinhada */
   background-repeat: no-repeat;
@@ -15,51 +15,7 @@ body {
   height: 100vh;
 }
 
-/* Navbar */
-.menu_navegacao {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px;
-  margin-right: 40px;
-}
 
-.menu_navegacao a {
-  text-decoration: none;
-  font-weight: bold;
-  margin: 0 6px;
-}
-
-.menu_item {
-  color: #356037;
-}
-
-.logoHeader {
-  margin-left: 70px;
-}
-
-#btnContact {
-  font-size: 14px;
-  width: 129px;
-  height: 32.53px;
-  color: #ffffff;
-  background-color: #356037;
-  border-radius: 8px;
-  border-style: none;
-  font-weight: medium;
-  cursor: pointer;
-  text-decoration: none;
-  text-transform: uppercase;
-  display: inline-block;
-  text-align: center;
-  line-height: 32.53px;
-}
-
-#btnContact:hover {
-  background-color: #2a4f2d;
-}
-/* Fim da navbar */
 
 /* Conteúdo principal do index*/
 
@@ -114,49 +70,7 @@ body {
   margin: 0px 80px 0px 60px;
 }
 
-/* Cards */
-.container-cards {
-  margin-top: 80px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 39px;
-}
 
-.card {
-  background-color: #55703f;
-  color: #ffffff;
-  border-radius: 7px;
-  text-align: center;
-  width: 220px;
-  height: auto;
-  transition: 0.3s ease-in;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 40px;
-  padding: 15px;
-}
-
-.card:hover {
-  transform: scale(1.075);
-  transition: 0.3s ease-in;
-  cursor: pointer;
-}
-
-.tituloCard {
-  font-size: 22px;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-}
-
-.textoCard {
-  font-size: 18px;
-  color: #ffffffc5;
-  margin-top: 10px;
-}
-/* Fim dos cards */
 
 /* Sugestão de ponto na pag index*/
 .naoRegistrado {
@@ -192,226 +106,223 @@ body {
 /* Fim da sugestão de ponto na pag index*/
 /* Fim do conteúdo principal do index*/
 
-/* Footer */
 
-.footer-content {
-  display: flex;
-  flex-direction: column;
-  color: white;
-  background-color: #55703f;
-  padding: 30px;
-}
-
-footer p {
-  font-size: 14px;
-  margin: 0 0 10px 0;
-}
-
-.linhaFooter {
-  border: none;
-  border-top: 1px solid #fff;
-  margin: 10px 0;
-}
-
-.footer-links {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.linksUteis {
-  font-size: 14px;
-  display: flex;
-  gap: 2rem;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.linksUteis a {
-  color: white;
-  text-decoration: none;
-}
-
-.linksUteis a:hover {
-  text-decoration: underline;
-}
-
-.redes_sociais {
-  display: flex;
-  gap: 10px;
-  cursor: pointer;
-}
-
-/* Fim do footer */
 
 /* Modal */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.modal-content {
-  background-color: #ffffff;
-  margin: 10% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 400px;
-  max-width: 90%;
-  border-radius: 8px;
-  box-sizing: border-box;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  max-height: 80vh;
-  overflow-y: auto;
+.popup-content {
+    background-color: var(--secondary-color);
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    text-align: left;
 }
 
-.modal-content label {
-  /* textos do modal */
-  font-size: 15px;
-  color: #000000;
+.popup-content h2 {
+    margin-bottom: 1rem;
 }
 
-.modal-content input[type="text"], /* campo de input tipo texto (cep, email, etc) */
-  .modal-content select {
-  width: 100%;
-  height: 40px;
-  padding: 0.65em;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
+.popup-content label {
+    display: block;
+    margin: 0.5rem 0 0.3rem;
+    color: var(--text-color);
 }
 
-.modal-content h2 {
-  font-size: 20px;
-  margin-bottom: 20px;
-  color: #405a41;
+.popup-content input,
+.popup-content select {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 1rem;
 }
 
-.button-container {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 0px;
+.popup-content .close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    cursor: pointer;
 }
 
-.modal-content button[type="submit"] {
-  width: 150px;
-  height: 45px;
-  color: #ffffff;
-  background-color: #405a41;
-  text-align: center;
-  border-radius: 8px;
-  box-shadow: none;
-  font-size: 18px;
-  text-transform: capitalize;
-  font-weight: bold;
-  cursor: pointer;
-  display: inline-block;
-  border: none;
+/* Botão Buscar no Modal */
+.popup-content button {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 0.8rem;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
 }
 
-.modal-content button[type="submit"]:hover {
-  background-color: #2a4f2d;
+.popup-content button:hover {
+    background-color: #388e3c;
 }
 
-.close {
-  /* botão de fechar */
-  color: #aaa;
-  font-size: 22px;
-  font-weight: bold;
-  cursor: pointer;
-  position: absolute;
-  top: 10px;
-  right: 10px;
+/* Resultados */
+.resultados-container {
+    padding: 2rem;
+    background-color: var(--background-color);
 }
 
-.close:hover {
-  color: black;
+.resultados-container h2 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
 }
 
-.dropdown {
-  /* Dropdown do tipo de material */
-  position: relative;
-  display: inline-block;
-  width: 100%;
-  margin-bottom: 20px;
+.resultados-container .card {
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.dropdown-btn {
-  /* texto de "selecione tipo de material"*/
-  width: 100%;
-  height: 40px;
-  padding: 0.65em;
-  border-radius: 5px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  cursor: pointer;
-  text-align: left;
+.resultados-container .card p {
+    margin-bottom: 0.5rem;
 }
 
-.dropdown-content {
-  /* itens do dropdown */
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-  width: 80%;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+.resultados-container .card a {
+    color: var(--primary-color);
+    font-weight: bold;
 }
 
-.dropdown-content label {
-  /* Texto dos itens do dropdown */
-  display: block;
-  margin-bottom: 10px;
+.resultados-container .card a:hover {
+    text-decoration: underline;
 }
 
-.dropdown-content label:hover {
-  background-color: #f1f1f1;
+
+
+/* Estilos para a página de pontos sugeridos */
+.suggested-points-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    text-align: left;
 }
 
-.dropdown:hover .dropdown-content {
-  display: block;
+.suggested-point {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
 }
 
-.dropdown-content input[type="checkbox"] {
-  margin-right: 10px;
+.suggested-point p {
+    margin: 5px 0;
 }
 
-.radio-label {
-  display: inline-block;
-  margin-right: 20px;
-  vertical-align: middle;
+.suggested-point button {
+    margin-right: 10px;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-.modal-content input[type="radio"] {
-  margin-right: -2px;
-  width: 19px;
-  height: 19px;
-  vertical-align: middle;
+.suggested-point button:hover {
+    background-color: #218838;
 }
 
-textarea {
-  /* campo para descrição */
-  width: calc(100% - 12px);
-  padding: 0.65em;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  resize: vertical;
-  font-size: 16px;
-  box-sizing: border-box;
-  margin-bottom: 10px;
+.suggested-point button:last-of-type {
+    background-color: #dc3545;
 }
 
-/* Fim do modal */
+.suggested-point button:last-of-type:hover {
+    background-color: #c82333;
+}
 
 
+.suggested-point button:last-of-type:hover {
+    background-color: #c82333;
+}
+
+
+/* styles.css */
+.popup-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 100%;
+    position: relative;
+}
+
+.popup-content .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+/* styles.css */
+.popup-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+    max-height: 80vh; /* Limita a altura do popup */
+    overflow-y: auto; /* Adiciona rolagem vertical */
+    position: relative;
+}
+
+.popup-content .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.empresa-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
