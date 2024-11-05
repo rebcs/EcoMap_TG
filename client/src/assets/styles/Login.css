@@ -1,0 +1,70 @@
+#formLogin label {
+  display: flex;
+  align-items: start;
+  margin-right: 18px;
+  font-size: 17px;
+  color: #000000;
+  margin-bottom: 2px;
+}
+
+#formLogin input[type="email"],
+#formLogin input[type="password"] {
+  width: calc(100% - 12px);
+  height: 50px;
+  padding: .65em;
+  border-radius: 5px;
+  margin-bottom: 1.3em;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.esqueci-senha {
+  color: rgba(0, 0, 0, 0.5);
+  text-align: left;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.esqueci-senha:hover {
+  text-decoration: underline;
+}
+
+.cadastro-redirect { /* Link caso a pessoa não tenha cadastro */
+  text-align: start;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.cadastro-redirect a {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.cadastro-redirect a:visited {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.cadastro-redirect a:hover {
+  text-decoration: underline;
+}
+
+.btnEntrar {
+  align-items: end;
+  width: 150px;
+  height: 45px;
+  color: #ffffff;
+  background-color: #405a41;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: none;
+  font-size: 18px;
+  text-transform: capitalize;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+  border: none;
+}
+
+.btnEntrar:hover {
+  background-color: #2a4f2d;
+}
