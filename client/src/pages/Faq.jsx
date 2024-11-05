@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import '../assets/styles/Faq.css'
 
 const Faq = () => {
     return (
