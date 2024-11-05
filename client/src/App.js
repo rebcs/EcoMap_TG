@@ -9,6 +9,7 @@ import BuscarPontoPopUp from "./pages/BuscarPontoPopUp";
 import BuscarOngPopUp from "./pages/BuscarOngPopUp";
 import BuscarEmpresaPopUp from "./pages/BuscarEmpresaPopUp";
 import SugerirPontoPopUp from "./pages/SugerirPontoPopUp";
+import AdicionarPontoPopup from "./pages/AdicionarPontoPopup";
 import ResultadoPontoColeta from "./pages/ResultadoPontoColeta";
 import ResultadoOng from "./pages/ResultadoOng";
 import ResultadoEmpresa from "./pages/ResultadoEmpresa";
@@ -31,6 +32,7 @@ function App() {
       <Route path="/buscar-ong" element={<BuscarOngPopUp/>}/>
       <Route path="/buscar-empresa" element={<BuscarEmpresaPopUp/>}/>
       <Route path="/sugerir-ponto" element={<SugerirPontoPopUp/>}/>
+      <Route path="/adicionar-ponto" element={<AdicionarPontoPopup/>}/>
       <Route path="/resultado-ponto-coleta" element={<ResultadoPontoColeta/>}/>
       <Route path="/resultados-ongs" element={<ResultadoOng/>}/>
       <Route path="/resultados-empresas" element={<ResultadoEmpresa/>}/>

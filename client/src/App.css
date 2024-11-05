@@ -253,13 +253,6 @@ body {
 .suggested-point button:last-of-type:hover {
     background-color: #c82333;
 }
-
-
-.suggested-point button:last-of-type:hover {
-    background-color: #c82333;
-}
-
-
 /* styles.css */
 .popup-container {
     position: fixed;
@@ -326,5 +319,3 @@ body {
     border: 1px solid #ddd;
     border-radius: 5px;
 }
-
-
