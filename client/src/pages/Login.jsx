@@ -18,7 +18,7 @@ const Login = () => {
       <input type="email" name="email" id="email" required="" autofocus="" />
       <label htmlFor="senha">Senha</label>
       <input type="password" name="senha" id="senha" required="" />
-      <p>
+      <p className='esqueciSenha'>
         <a href="esqueciSenha.html" className="esqueci-senha">
           Esqueci minha senha
         </a>
