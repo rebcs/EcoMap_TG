@@ -1,11 +1,15 @@
 import React from 'react'
+import Icon1 from '../assets/icon_box1.png'
+import Icon2 from '../assets/icon_box2.png'
+import Icon3 from '../assets/icon_box3.png'
+
 
 const Cards = () => {
   return (
     <div className="container-cards">
       <div className="card">
         <h4 className="tituloCard">O que reciclar?</h4>
-        <img src="/img/icon_box1.png" alt="Avatar" />
+        <img src={Icon1} alt="Avatar" />
         <div className="container">
           <p className="textoCard">
             Clique para saber mais sobre os tipos de materiais que devem ser
@@ -15,7 +19,7 @@ const Cards = () => {
       </div>
       <div className="card">
         <h4 className="tituloCard">Como reciclar?</h4>
-        <img src="/img/icon_box2.png" alt="Avatar" />
+        <img src={Icon2} alt="Avatar" />
         <div className="container" >
           <p className="textoCard">
             Você conhece os métodos ideais para descartar cada tipo de material?
@@ -24,7 +28,7 @@ const Cards = () => {
       </div>
       <div className="card">
         <h4 className="tituloCard">Os impactos da reciclagem</h4>
-        <img src="/assets/icon_box3.png" alt="Avatar" />
+        <img src={Icon3} alt="Avatar" />
         <div className="container">
           <p className="textoCard">
             Aprenda sobre os impactos da reciclagem no meio ambiente

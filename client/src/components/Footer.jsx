@@ -1,4 +1,9 @@
 import React from 'react'
+import Facebook from '../assets/icon_facebook.png'
+import Linkedin from '../assets/icon_linkedin.png'
+import Twitter from '../assets/icon_twitter.png'
+import Youtube from '../assets/icon_youtube.png'
+import Instagram from '../assets/icon_instagram.png'
 
 const Footer = () => {
   return (
@@ -21,11 +26,11 @@ const Footer = () => {
           </li>
         </ul>
         <div className="redes_sociais">
-          <img src="/img/icon_facebook.png" alt="" />
-          <img src="/img/icon_linkedin.png" alt="" />
-          <img src="/img/icon_twitter.png" alt="" />
-          <img src="/img/icon_youtube.png" alt="" />
-          <img src="/img/icon_instagram.png" alt="" />
+          <img src={Facebook} alt="" />
+          <img src={Linkedin} alt="" />
+          <img src={Twitter} alt="" />
+          <img src={Youtube} alt="" />
+          <img src={Instagram} alt="" />
         </div>
       </div>
     </div>
