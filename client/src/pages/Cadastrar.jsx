@@ -27,7 +27,7 @@ const Cadastrar = () => {
 
             {/* Campos ocultos */}
             {/* Campos para empresa */}
-            <div id="empresaFields" style={{ display: "none" }}>
+            <div id="empresaFields" >
               <label htmlFor="nome">Nome</label>
               <input type="text" name="nome" id="nome" required="" />
               <label htmlFor="cnpj">CNPJ</label>
@@ -149,7 +149,7 @@ const Cadastrar = () => {
               </div>
             </div>
             {/* Campos para ONG */}
-            <div id="ongFields" style={{ display: "none" }}>
+            <div id="ongFields" style={{ display: "none" }} >
               <label htmlFor="nomeOng">Nome da ONG</label>
               <input type="text" name="nome" id="nomeOng" required="" />
               <label htmlFor="cnpjOng">CNPJ</label>
